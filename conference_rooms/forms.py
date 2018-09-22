@@ -14,6 +14,9 @@ class RoomCreateForm(forms.ModelForm):
 
 
 class ReservationCreateForm(forms.ModelForm):
+    date = forms.DateField()
+    comment = forms.CharField(required=False)
+
     class Meta:
         model = Reservation
         fields = [

@@ -36,4 +36,26 @@ class RoomUpdateView(UpdateView):
 
     def get_object(self, queryset=None):
         id_ = self.kwargs.get('id')
-        return get_object_or_404(Room, id=id_)
+
+
+class ReservationDetailView(DetailView):
+    template_name = 'conference_rooms/reservation-detail-view.html'
+    queryset = Reservation.objects.all()
+
+    def get_object(self, queryset=None):
+        id_ = self.kwargs.get('id')
+        return get_object_or_404(Reservation, id=id_)
+
+
+class ReservationCreateView(CreateView):
+    template_name = 'conference_rooms/reservation-create-view.html'
+    form_class = ReservationCreateForm
+
+
+class ReservationUpdateView(UpdateView):
+    template_name = 'conference_rooms/reservation-create-view.html'
+    form_class = ReservationCreateForm
+
+    def get_object(self, queryset=None):
+        id_ = self.kwargs.get('id')
+        return get_object_or_404(Reservation, id=id_)

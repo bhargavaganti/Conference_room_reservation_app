@@ -20,6 +20,9 @@ from conference_rooms.views import (
     RoomDetailView,
     RoomCreateView,
     RoomUpdateView,
+    ReservationDetailView,
+    ReservationCreateView,
+    ReservationUpdateView,
 )
 
 urlpatterns = [
@@ -27,4 +30,7 @@ urlpatterns = [
     path('room/<int:id>/', RoomDetailView.as_view(), name='room-detail-view'),
     path('room/new/', RoomCreateView.as_view(), name='room-create-view'),
     path('room/modify/<int:id>/', RoomUpdateView.as_view(), name='room-update-view'),
+    path('reservation/<int:id>/', ReservationDetailView.as_view(), name='reservation-detail-view'),
+    path('reservation/new/', ReservationCreateView.as_view(), name='reservation-create-view'),
+    path('reservation/modify/<int:id>/', ReservationUpdateView.as_view(), name='reservation-update-view'),
 ]

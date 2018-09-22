@@ -1,0 +1,9 @@
+{% extends 'conference_rooms/base.html' %}
+
+
+{% block content %}
+    Room: {{ object.room }}<br>
+    Date: {{ object.date }}<br>
+    Comment: {{ object.comment }}<br>
+    Max pll: {{ object.room.capacity }}
+{% endblock %}

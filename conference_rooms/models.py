@@ -21,12 +21,15 @@ class Room(models.Model):
 class Reservation(models.Model):
     date = models.DateField()
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=255)
+    comment = models.CharField(max_length=255, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('date', 'room')
 
     def __str__(self):
         return f'{self.room} on {self.date}'
 
-    class Meta:
-        unique_together = ('date', 'room')
+    def get_absolute_url(self):
+        return reverse('reservation-detail-view', kwargs={'id':self.id})
