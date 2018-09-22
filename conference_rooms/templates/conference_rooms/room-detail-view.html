@@ -1,0 +1,13 @@
+{% extends 'conference_rooms/base.html' %}
+
+
+{% block content %}
+    Name: {{ object }}<br>
+    Capacity: {{ object.capacity }}<br>
+    Projector:
+    {% if object.projector_is_available %}
+        Available
+    {% else %}
+        Not Available
+    {% endif %}
+{% endblock %}

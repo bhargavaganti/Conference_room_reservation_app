@@ -115,4 +115,5 @@ modules.xml
 
 
 # Migration files
-00*-*.py
+00*_*.py
+*/migrations/__init__.py
