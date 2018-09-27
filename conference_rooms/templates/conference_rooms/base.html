@@ -8,20 +8,28 @@
 
 <body>
 
-    {% include 'conference_rooms/navbar.html' %}
+{% include 'conference_rooms/navbar.html' %}
 
-    {% if messages %}
-        {% for message in messages %}
-            <div class="content">
-                {{ message }}
-            </div>
-        {% endfor %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="content">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% block content %}
+{% endblock %}
+
+{% block manage_object %}
+    {% if '/delete/' not in request.path and '/new/' not in request.path %}
+        {% if '/reservation' in request.path %}
+            {% include 'conference_rooms/manage-reservation.html' %}
+        {% elif '/room' in request.path %}
+            {% include 'conference_rooms/manage-room.html' %}
+        {% endif %}
     {% endif %}
-
-    <div class="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+{% endblock %}
 
 </body>
 </html>

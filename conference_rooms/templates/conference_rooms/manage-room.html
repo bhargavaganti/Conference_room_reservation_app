@@ -1,0 +1,9 @@
+<div class="manage">
+    <p><b>Manage</b></p>
+    {% if object %}
+        <input type="button" onclick="location.href='{% url 'room-update-view' object.id %}'" value="Edit"/>
+        <input type="button" onclick="location.href='{% url 'room-delete-view' object.id %}'" value="Delete"/>
+    {% elif object_list %}
+        <input type="button" onclick="location.href='{% url 'room-create-view' %}'" value="Add"/>
+    {% endif %}
+</div>

@@ -1,0 +1,25 @@
+{% extends 'conference_rooms/base.html' %}
+
+{% block content %}
+    <div class="content">
+        <h2>Reservations</h2>
+        <table>
+            <tr>
+                <th>ID</tH>
+                <th>Room</th>
+                <th>Date</th>
+                <th>Comment</th>
+                <th>Capacity</th>
+            </tr>
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.id }}</td>
+                    <td><a href="{% url 'reservation-detail-view' object.id %}">{{ object.room }}</a></td>
+                    <td>{{ object.date }}</td>
+                    <td>{{ object.comment }}</td>
+                    <td>{{ object.room.capacity }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

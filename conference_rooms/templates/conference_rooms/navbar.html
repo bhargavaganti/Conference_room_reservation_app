@@ -1,5 +1,10 @@
-{#TODO Navbar: make me plz#}
-<ul>
-    <li>NavBar HERE</li>
-</ul>
+<nav class="navbar">
+    <ul>
+        <li><a href="{% url 'homepage-view' %}">Home</a></li>
+        <li {% if 'room' in request.path %}class="active"{% endif %}>
+            <a href="{% url 'rooms-list-view' %}">Rooms</a></li>
+        <li {% if 'reservation' in request.path %}class="active"{% endif %}>
+            <a href="{% url 'reservations-list-view' %}">Reservations</a></li>
+    </ul>
+</nav>
 

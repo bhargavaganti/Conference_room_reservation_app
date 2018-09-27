@@ -1,0 +1,38 @@
+{% extends 'conference_rooms/base.html' %}
+
+{% block content %}
+    <div class="content">
+        <h2>Rooms</h2>
+        <table>
+            <tr>
+                <th>ID</tH>
+                <th>Name</th>
+                <th>Capacity</th>
+                <th>Projector</th>
+                <th>Is Active</th>
+            </tr>
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.id }}</td>
+                    <td><a href="{% url 'room-detail-view' object.id %}">{{ object }}</a></td>
+                    <td>{{ object.capacity }}</td>
+                    <td>
+                        {% if object.projector_is_available %}
+                            Available
+                        {% else %}
+                            Not Available
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if object.is_active %}
+                            YES
+                        {% else %}
+                            NO
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+

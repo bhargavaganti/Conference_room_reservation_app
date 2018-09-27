@@ -3,8 +3,9 @@
 {% block content %}
     <div class="content">
         <form action="." method="post">{% csrf_token %}
-            {{ form.as_p }}
+            <p>Delete Reservation {{ object }}?</p>
             <input type="submit" value="Save"/>
+            <input type="button" onclick="location.href='{{ object.get_absolute_url }}'" value="Cancel"/>
         </form>
     </div>
 {% endblock %}

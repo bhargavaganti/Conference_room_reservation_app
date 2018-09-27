@@ -1,0 +1,25 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+    <Title>Conference Room Reservation App</Title>
+    <link rel="stylesheet" type="text/css" href="{% static 'homeapp/style.css' %}">
+</head>
+
+<body>
+
+{% include 'homeapp/navbar.html' %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="content">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
