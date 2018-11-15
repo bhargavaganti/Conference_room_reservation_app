@@ -12,13 +12,14 @@
                 Not Available
             {% endif %}</p>
     </div>
-
+    <span class="additional-indentation">
     <p><strong>Reservations:</strong></p>
-    {% if reservations %}
-        {% for reservation in reservations %}
-            <p><a href="{% url 'reservation-detail-view' reservation.id %}">{{ reservation }}</a></p>
-        {% endfor %}
-    {% else %}
-        <p><a class="highlight" href="{% url 'reservation-create-view' %}">Make New Reservation</a></p>
-    {% endif %}
+        {% if reservations %}
+            {% for reservation in reservations %}
+                <p><a href="{% url 'reservation-detail-view' reservation.id %}">{{ reservation }}</a></p>
+            {% endfor %}
+        {% else %}
+            <p><a class="highlight" href="{% url 'reservation-create-view' %}">Make New Reservation</a></p>
+        {% endif %}
+    </span>
 {% endblock %}

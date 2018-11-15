@@ -20,8 +20,9 @@ from .models import (
 )
 
 from .forms import (
-    ReservationCreateForm,
     RoomCreateForm,
+    RoomSearchForm,
+    ReservationCreateForm,
 )
 
 
@@ -75,9 +76,20 @@ class RoomDeleteView(DeleteView):
         return reverse_lazy('rooms-list-view')
 
 
+class RoomSearchView(View):
+    def get(self, request):
+        form = RoomSearchForm(request.GET or None)
+        ctx = {
+            'form': form
+        }
+        if form.is_valid():
+            ctx['object_list'] = form.search_room()
+        return render(request, 'conference_rooms/room-search-view.html', ctx)
+
+
 class ReservationsListView(ListView):
     template_name = 'conference_rooms/reservations-list-view.html'
-    queryset = Reservation.objects.filter(date__gte=datetime.now().date()).order_by('date')
+    queryset = Reservation.objects.filter(date__gte=datetime.now().date()).order_by('date', '-room__capacity')
 
 
 class ReservationDetailView(DetailView):
@@ -92,6 +104,15 @@ class ReservationDetailView(DetailView):
 class ReservationCreateView(CreateView):
     template_name = 'conference_rooms/reservation-create-view.html'
     form_class = ReservationCreateForm
+
+    def get_initial(self):
+        initial = super(ReservationCreateView, self).get_initial()
+        room_id = self.request.GET.get('room')
+        date = self.request.GET.get('date')
+        if room_id and date:
+            initial['room'] = get_object_or_404(Room, id=room_id)
+            initial['date'] = date
+        return initial
 
 
 class ReservationUpdateView(UpdateView):

@@ -3,11 +3,14 @@
         <li {% if '/' == request.path %}class="active"{% endif %}>
             <a href="{% url 'homepage-view' %}">Home</a>
         </li>
-        <li {% if 'room' in request.path %}class="active"{% endif %}>
+        <li {% if '/room/' in request.path %}class="active"{% endif %}>
             <a href="{% url 'rooms-list-view' %}">Rooms</a>
         </li>
-        <li {% if 'reservation' in request.path %}class="active"{% endif %}>
+        <li {% if '/reservation/' in request.path %}class="active"{% endif %}>
             <a href="{% url 'reservations-list-view' %}">Reservations</a>
+        </li>
+        <li {% if '/search_room/' in request.path %}class="active"{% endif %}>
+            <a href="{% url 'room-search-view' %}">Find Room</a>
         </li>
     </ul>
 </nav>
