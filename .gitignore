@@ -112,8 +112,3 @@ modules.xml
 
 
 # End of https://www.gitignore.io/api/linux,django,pycharm+all
-
-
-# Migration files
-00*_*.py
-*/migrations/__init__.py
