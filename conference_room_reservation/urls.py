@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import re_path, path
 
-from homeapp.views import HomepageView
 from conference_rooms.views import (
+    HomepageView,
     RoomsListView,
     RoomDetailView,
     RoomCreateView,
@@ -32,15 +32,15 @@ from conference_rooms.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', HomepageView.as_view(), name='homepage-view'),
-    path('rooms/', RoomsListView.as_view(), name='rooms-list-view'),
-    path('room/<int:id>/', RoomDetailView.as_view(), name='room-detail-view'),
-    path('room/new/', RoomCreateView.as_view(), name='room-create-view'),
-    path('room/modify/<int:id>/', RoomUpdateView.as_view(), name='room-update-view'),
-    path('room/delete/<int:id>/', RoomDeleteView.as_view(), name='room-delete-view'),
-    path('reservations/', ReservationsListView.as_view(), name='reservations-list-view'),
-    path('reservation/<int:id>/', ReservationDetailView.as_view(), name='reservation-detail-view'),
-    path('reservation/new/', ReservationCreateView.as_view(), name='reservation-create-view'),
-    path('reservation/modify/<int:id>/', ReservationUpdateView.as_view(), name='reservation-update-view'),
-    path('reservation/delete/<int:id>/', ReservationDeleteView.as_view(), name='reservation-delete-view'),
+    re_path(r'^$', HomepageView.as_view(), name='homepage-view'),
+    re_path(r'^rooms/$', RoomsListView.as_view(), name='rooms-list-view'),
+    re_path(r'^room/(?P<id>(\d)+)/$', RoomDetailView.as_view(), name='room-detail-view'),
+    re_path(r'^room/new/$', RoomCreateView.as_view(), name='room-create-view'),
+    re_path(r'^room/modify/(?P<id>(\d)+)/$', RoomUpdateView.as_view(), name='room-update-view'),
+    re_path(r'^room/delete/(?P<id>(\d)+)/$', RoomDeleteView.as_view(), name='room-delete-view'),
+    re_path(r'^reservations/$', ReservationsListView.as_view(), name='reservations-list-view'),
+    re_path(r'^reservation/(?P<id>(\d)+)/$', ReservationDetailView.as_view(), name='reservation-detail-view'),
+    re_path(r'^reservation/new/$', ReservationCreateView.as_view(), name='reservation-create-view'),
+    re_path(r'^reservation/modify/(?P<id>(\d)+)/$', ReservationUpdateView.as_view(), name='reservation-update-view'),
+    re_path(r'^reservation/delete/(?P<id>(\d)+)/$', ReservationDeleteView.as_view(), name='reservation-delete-view'),
 ]

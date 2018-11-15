@@ -4,7 +4,7 @@
     <div class="content">
         <form action="." method="post">{% csrf_token %}
             <p>Delete Reservation {{ object }}?</p>
-            <input type="submit" value="Save"/>
+            <input type="submit" value="DELETE"/>
             <input type="button" onclick="location.href='{{ object.get_absolute_url }}'" value="Cancel"/>
         </form>
     </div>

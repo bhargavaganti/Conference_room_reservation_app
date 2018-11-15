@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator
 
 class Room(models.Model):
     name = models.CharField(max_length=255)
-    capacity = models.IntegerField(validators=[MinValueValidator(10), ])
+    capacity = models.IntegerField(validators=[MinValueValidator(10)])
     projector_is_available = models.BooleanField(default=True, verbose_name='projector')
     is_active = models.BooleanField(default=True, verbose_name='active')
     date_created = models.DateTimeField(auto_now_add=True)
@@ -29,7 +29,7 @@ class Reservation(models.Model):
         unique_together = ('date', 'room')
 
     def __str__(self):
-        return f'{self.room} on {self.date}'
+        return f'{self.room} on {self.date.strftime("%d-%m-%Y")}'
 
     def get_absolute_url(self):
-        return reverse('reservation-detail-view', kwargs={'id':self.id})
+        return reverse('reservation-detail-view', kwargs={'id': self.id})

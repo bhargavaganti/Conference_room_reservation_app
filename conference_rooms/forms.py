@@ -1,5 +1,13 @@
 from django import forms
+from datetime import datetime
 from .models import Room, Reservation
+
+DATE_FORMATS = (
+    '%d/%m/%Y',
+    '%d-%m-%Y',
+    '%d.%m.%Y',
+    '%d %m %Y',
+)
 
 
 class RoomCreateForm(forms.ModelForm):
@@ -14,7 +22,7 @@ class RoomCreateForm(forms.ModelForm):
 
 
 class ReservationCreateForm(forms.ModelForm):
-    date = forms.DateField()
+    date = forms.DateField(widget=forms.DateInput(format=('%d/%m/%Y',)), input_formats=DATE_FORMATS)
     comment = forms.CharField(required=False)
 
     class Meta:
@@ -24,3 +32,9 @@ class ReservationCreateForm(forms.ModelForm):
             'date',
             'comment',
         ]
+
+    def clean_date(self):
+        date = self.cleaned_data['date']
+        if date <= datetime.now().date():
+            raise forms.ValidationError('Can not add reservation with past date')
+        return date

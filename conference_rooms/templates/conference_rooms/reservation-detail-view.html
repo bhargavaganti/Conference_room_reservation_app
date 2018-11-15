@@ -2,9 +2,11 @@
 
 {% block content %}
     <div class="content">
-        <p>Room: {{ object.room }}</p>
-        <p>Date: {{ object.date }}</p>
-        <p>Comment: {{ object.comment }}</p>
-        <p>Capacity: {{ object.room.capacity }}</p>
-    </div>
+        <p><strong>Room:</strong> {{ object.room }}</p>
+        <p><strong>Date:</strong> {{ object.date|date:"d-m-Y" }}</p>
+        <p><strong>Capacity:</strong> {{ object.room.capacity }}</p>
+        <p><strong>Comment:</strong>
+            <span class="comment">{{ object.comment }}</span>
+        </p>
+        </div>
 {% endblock %}

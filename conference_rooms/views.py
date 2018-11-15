@@ -1,6 +1,11 @@
-import datetime
-from django.shortcuts import  get_object_or_404
-from django.urls import reverse
+from datetime import datetime
+from django.shortcuts import (
+    render,
+    get_object_or_404,
+)
+from django.urls import reverse_lazy
+
+from django.views import View
 from django.views.generic import (
     ListView,
     DetailView,
@@ -20,6 +25,11 @@ from .forms import (
 )
 
 
+class HomepageView(View):
+    def get(self, request):
+        return render(request, 'conference_rooms/base.html')
+
+
 class RoomsListView(ListView):
     template_name = 'conference_rooms/rooms-list-view.html'
     queryset = Room.objects.all().order_by('id')
@@ -32,6 +42,12 @@ class RoomDetailView(DetailView):
     def get_object(self, queryset=None):
         id_ = self.kwargs.get('id')
         return get_object_or_404(Room, id=id_)
+
+    def get_context_data(self, **kwargs):
+        context = super(RoomDetailView, self).get_context_data()
+        id_ = self.kwargs.get('id')
+        context['reservations'] = Reservation.objects.filter(room_id=id_, date__gte=datetime.now()).order_by('date')
+        return context
 
 
 class RoomCreateView(CreateView):
@@ -56,13 +72,12 @@ class RoomDeleteView(DeleteView):
         return get_object_or_404(Room, id=id_)
 
     def get_success_url(self):
-        return reverse('rooms-list-view')
+        return reverse_lazy('rooms-list-view')
 
 
 class ReservationsListView(ListView):
     template_name = 'conference_rooms/reservations-list-view.html'
-    queryset = Reservation.objects.all().order_by('-date')
-    # queryset = Reservation.objects.filter(date__gte=datetime.datetime.now())
+    queryset = Reservation.objects.filter(date__gte=datetime.now().date()).order_by('date')
 
 
 class ReservationDetailView(DetailView):
@@ -96,4 +111,4 @@ class ReservationDeleteView(DeleteView):
         return get_object_or_404(Reservation, id=id_)
 
     def get_success_url(self):
-        return reverse('reservations-list-view')
+        return reverse_lazy('reservations-list-view')

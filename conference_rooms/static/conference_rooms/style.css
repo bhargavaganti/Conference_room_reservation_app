@@ -9,6 +9,10 @@ a {
     color: inherit;
 }
 
+p{
+    padding-left: 16px;
+}
+
 .content {
     padding: 16px;
 }
@@ -16,6 +20,7 @@ a {
 .manage {
     padding: 16px;
     border-top: 0.1em solid #4EB1BA;
+    margin-top: 16px;
 }
 
 .manage input{
@@ -50,6 +55,17 @@ a {
     background-color: #329a9a;
 }
 
+.highlight {
+    color: #b8860b;
+}
+
+.comment {
+    display: block;
+    padding-left: 20px;
+    padding-top: 15px;
+    font-size: 1.1em;
+}
+
 table {
     padding: 15px;
     border-collapse: collapse;
@@ -65,5 +81,5 @@ td {
 
 th, td {
     text-align: center;
-    padding: 5px;
+    padding: 10px;
 }
